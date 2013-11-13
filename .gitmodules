@@ -1,0 +1,6 @@
+[submodule "RoRcourseJS"]
+	path = RoRcourseJS
+	url = https://github.com/Yaneraz/RoRCourseJStask.git
+[submodule "taskHTML"]
+	path = taskHTML
+	url = https://github.com/Yaneraz/homeHTML.git
