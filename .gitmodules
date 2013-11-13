@@ -4,3 +4,6 @@
 [submodule "taskHTML"]
 	path = taskHTML
 	url = https://github.com/Yaneraz/homeHTML.git
+[submodule "jsCourseTask"]
+	path = jsCourseTask
+	url = https://github.com/Yaneraz/jsCourseTask.git
