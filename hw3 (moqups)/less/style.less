@@ -1,0 +1,31 @@
+// ==== [ global variables ] ==== //
+@fontColor: #333;
+@linkColor: #1464F6;
+@linkColorHover: #c00;
+
+@maxWidth: 1140px;
+@minWidth: 978px;
+
+@phoneWidth: 568px;
+@phone: ~"screen and (max-width: 568px)";
+
+// ==== [ global mixins ] ==== //
+.clr {
+
+
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// ==== [ includes ] ====
+@import "reset";
+@import "_gridism";
+@import "sprites";
+@import "main";

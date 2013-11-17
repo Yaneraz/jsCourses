@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello jsCourses</title>
+    <meta name="viewport" content="width=device-width">
+    <link href="css/style.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+            var mapOptions = {
+                zoom: 4,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <nav>
+        <ul class="grid">
+            <li class="one-quarter unit"><a href="#home"><i class="icon-home"></i> Home</a></li>
+            <li class="one-quarter unit"><a href="#faq"><i class="icon-question"></i> FAQ</a></li>
+            <li class="one-quarter unit"><a href="#contacts"><i class="icon-address-book"></i> Contacts</a></li>
+            <li class="one-quarter unit"><a href="#stay-in-touch"><i class="icon-wink"></i> Stay in touch</a></li>
+        </ul>
+    </nav>
+
+    <article class="grid">
+        <div class="whole unit">
+            <section id="home" class="txt">
+                <figure class="pull-left">
+                    <img src="img/img-plug.png" alt=""/>
+                </figure>
+                <p>Первостепенный текст Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+
+                <p>Второстепенный текст, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+
+                <figure class="pull-right">
+                    <img src="img/img-plug.png" alt=""/>
+                </figure>
+                <p>Третий сорт, забиваем полосу Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+            </section>
+        </div>
+    </article>
+
+    <section id="faq" class="grid">
+        <div class="whole unit">
+            <h2>FAQ</h2>
+
+            <dl>
+                <dt>Question 1</dt>
+                <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec</dd>
+
+                <dt>Question 2</dt>
+                <dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam.</dd>
+            </dl>
+        </div>
+    </section>
+
+    <article id="contacts" class="grid contacts">
+        <div class="whole unit">
+            <h2>Contacts</h2>
+
+            <section class="contacts__map unit one-third">
+                <div id="map"></div>
+            </section>
+            <section class="contacts__info unit two-thirds h-card">
+                <div class="field">
+                    <i class="icon-location"></i>
+                    adrress: <span class="p-street-address">serious office</span> <span class="p-locality">outside Seriousville</span>, <span class="p-note">just by boring lake</span>
+                </div>
+                <div class="field">
+                    <i class="icon-envelop"></i>
+                    email: <a href="#" class="mailto:company@serious.business"><span class="u-email">company@serious.business</span></a>
+                </div>
+                <div class="field">
+                    <i class="icon-phone"></i>
+                    phone: <a href="#"><span class="p-tel">888-888-88</span></a>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <section id="stay-in-touch" class="grid">
+        <div class="whole">
+            <h2>Stay in touch</h2>
+
+            <form action="#" class="form">
+                <div class="field">
+                    <div class="field__left">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="field__right">
+                        <input id="name" type="text" value="" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field__left">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="field__right">
+                        <input id="email" type="email" value="" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field__right">
+                        <label><input type="checkbox"/> I agree to get spam</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="grid ftr">
+        <div class="whole unit">
+            <div class="half pull-left ftr__contacts hide-on-mobiles unit">
+                <ul class="grid">
+                    <li class="one-quarter"><a href="#home">Home</a></li>
+                    <li class="one-quarter"><a href="#faq">FAQ</a></li>
+                    <li class="one-quarter"><a href="#contacts">Contacts</a></li>
+                    <li class="one-quarter"><a href="#stay-in-touch">Stay in touch</a></li>
+                </ul>
+            </div>
+            <div class="half pull-left ftr__feedback unit">
+                <div class="grid">
+                    <h3><i class="icon-redo"></i> Let us hear your feedback</h3>
+
+                    <form action="#" class="form">
+                        <span class="form__txt">How likely will you advise us?</span>
+                    <span class="form__labels">
+                        <label><input name="vote" type="radio"/> --</label>
+                        <label><input name="vote" type="radio"/> -+</label>
+                        <label><input name="vote" type="radio"/> +-</label>
+                        <label><input name="vote" type="radio"/> ++</label>
+                    </span>
+
+                        <input type="submit" class="form__vote" value="vote" />
+                    </form>
+                </div>
+            </div>
+
+            <div class="ftr__copy grid">
+                &copy; Copyright 2013 - sudodoki
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
