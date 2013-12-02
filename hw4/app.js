@@ -144,6 +144,9 @@ var Person2 = function(args){
                 res['get' + firstLetter + prop.slice(1)] = function(){
                     return args[prop];
                 };
+                res['set' + firstLetter + prop.slice(1)] = function(newValue){
+                    args[prop] = newValue;
+                };
             })(prop);
         }
     }
@@ -170,5 +173,7 @@ var p2 = new Person2({
 //console.log(p2.name)
 //console.log(p2.getAge())
 //console.log(p2.age)
+//p2.setAge(11)
+//console.log(p2.getAge())
 //console.log(p2.jump())
 //console.log(p2.getJump)
