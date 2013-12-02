@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Maps are cool.</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="bower_components/gridism/gridism.css">-->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+</head>
+<body class="wrap">
+<div class="grid">
+    <div id='leaflet' style='height: 300px; width: 400px' class="unit whole">
+    </div>
+</div>
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+<script src="bing.js"></script>
+<script>
+    var map = L.map('leaflet').setView([50.419,30.51956], 13);
+    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib='Map data © OpenStreetMap contributors';
+    var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+
+    // start the map in South-East England
+    bingRoad = new L.BingLayer("Ah_3gtCZudB1RvMYH-zvcb7QA9IETWh7i7m-SjKGcZQ8ayXrLbAZQe0MIowXgTT6", {
+        subdomains: [0, 1, 2, 3],
+        type: 'Road',
+        attribution: 'Bing'
+    });
+    bingAerial = new L.BingLayer("Ah_3gtCZudB1RvMYH-zvcb7QA9IETWh7i7m-SjKGcZQ8ayXrLbAZQe0MIowXgTT6");
+    map.addLayer(osm);
+
+    map.addLayer(bingRoad);
+    map.addLayer(bingAerial);
+    map.setView(new L.LatLng(50.414,30.519),12);
+
+    this.map.addControl(new L.Control.Layers({
+        OpenStreetMap: osm,
+        BingRoad: bingRoad,
+        BingAerial: bingAerial
+    }, {}));
+
+</script>
+</body>
+</html>

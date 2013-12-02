@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<!--<div id="google-map-container"><img src="" alt="Google static map"/> </div>-->
+
+<!--<div id="yandex-map-container"><img src="" alt="Yandex static map"/> </div>-->
+
+<div id="google-map-canvas" style="width:400px; height:400px; margin-bottom:20px;"></div>
+<div id="yandex-map" style="width: 600px; height: 400px; margin-bottom:20px;"></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"> </script>
+<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+
+<!--<script src="app.js"></script>-->
+<script>
+    (function(){
+        var host = 'http://maps.googleapis.com/maps/api/staticmap',
+                params = {
+                    center: '40.706734,-73.996789',
+                    zoom: 13,
+                    size: '600x300',
+                    maptype: 'roadmap',
+                    'sensor': false
+                },
+                markers = [
+                    'color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318',
+                    'color:red%7Ccolor:red%7Clabel:C%7C40.718217,-73.998284'
+                ],
+                url = host + '?' + $.param(params) + '&markers=' + markers.join('&markers=');
+
+        $(function(){
+            $('#google-map-container img').attr('src', url);
+        });
+    })();
+
+    (function(){
+        var host = 'http://static-maps.yandex.ru/1.x/',
+                params = {
+                    ll: '37.620070,55.753630',
+                    size: '450,450',
+                    z: 13,
+                    l: 'map'
+                },
+                markers = [
+                    '37.620070,55.753630,pmwtm1',
+                    '37.64,55.76363,pmwtm99'
+                ],
+                url = host + '?' + $.param(params) + '&pt=' + markers.join('~');
+
+        $(function(){
+            $('#yandex-map-container img').attr('src', url);
+        });
+    })();
+
+    (function(){
+        var myLatlng = new google.maps.LatLng(50.419757,30.516154);
+
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position){
+                myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            });
+        } else {
+            //throw new Error('your browser does not support geolocation');
+            console.log('your browser does not support geolocation')
+        }
+
+            function initialize() {
+                var mapOptions = {
+                        center: myLatlng,
+                        zoom: 14
+                    },
+                    map = new google.maps.Map(document.getElementById("google-map-canvas"), mapOptions),
+                    image = {
+                        url: 'http://done.z-index.com.ua/calligaris/src/img/map-icon.png',
+                        origin: new google.maps.Point(0,0),
+                        anchor: new google.maps.Point(34,40)
+                    },
+                    marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        icon: image,
+                        title:"Hello World!"
+                    }),
+                    contentString =
+                        '<div style="height:70px; width:170px;">' +
+                            'Your coordinates <br />' +
+                            'lat: ' + myLatlng.ob.toFixed(3) + '<br />' +
+                            'lng: ' + myLatlng.pb.toFixed(3) + '<br />' +
+                        '</div>',
+                    infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map,marker);
+                    //console.log(myLatlng)
+                });
+            }
+            //google.maps.event.addDomListener(window, 'load', initialize);
+            window.onload = initialize;
+    })();
+
+    (function(){
+        ymaps.ready(init);
+
+        function init(){
+            var map = new ymaps.Map ("yandex-map", {
+                center: [55.76, 37.64],
+                zoom: 7
+            });
+        }
+    })();
+</script>
+</body>
+</html>
