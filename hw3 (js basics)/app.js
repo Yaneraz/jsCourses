@@ -120,6 +120,7 @@ function getFriends(id){
     return friends;
 }
 
+
 //console.log(getFriends(2)) // [{id: 1, name: 'Brad', friends: [2,5,6]}, {id: 3, name: 'Tom', friends: [2, 5]}]
 //console.log(getFriends(4)) // []
 //console.log(getFriends(100500)) // null
