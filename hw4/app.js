@@ -23,11 +23,13 @@ var App = function(){
             var node = e.target || e.srcElement;
             // this - should be the main context - instance of App
             // node - should be the node, that fires event
+            console.log(this);
+            console.log(node);
         }
     };
 };
 
-if (typeof Function.prototype.myBind !== 'undefined') {
+if (typeof Function.prototype.myBind !== undefined) {
     Function.prototype.myBind = function(context){
         if (typeof this !== "function") {
             // closest thing possible to the ECMAScript 5 internal IsCallable function
@@ -126,5 +128,4 @@ assert(p2.age == undefined, 'p2.age is undefined');
 p2.setAge(11);
 assert(p2.getAge() == 11, 'p2.getAge was set to 11 successfully');
 assert(p2.jump() == 'My name is Jack and I can jump.', 'My name is Jack and I can jump. ');
-console.log(p2.jump());
 assert(p2.getJump == undefined, 'p2.getJump is undefined');
