@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Canvases are cool.</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="gridism.css">
+
+</head>
+<body class="wrap">
+<div class="grid">
+    <canvas id="canvas" width="800" height="600">
+        Your browser does not support canvas
+    </canvas>
+
+	<button>Click me</button>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d');
+
+//	    ctx.beginPath();
+//	    ctx.moveTo(0,0);
+//        ctx.lineWidth = 12;
+//        ctx.save();
+//        ctx.lineCap = 'bottom';
+//        ctx.strokeStyle = 'red';
+//	    ctx.lineTo(300, 200);
+//	    ctx.stroke();
+//
+//        ctx.restore();
+//	    ctx.beginPath();
+//	    ctx.arc(400, 300, 50, 0,  2 * Math.PI);
+//	    ctx.stroke();
+//
+//        ctx.beginPath();
+//	    ctx.rect(0, 0, 800, 600);
+//        ctx.fillStyle = '#face3d';
+//        ctx.fill();
+//	    ctx.stroke();
+//
+//	    ctx.beginPath();
+//	    ctx.restore();
+//        ctx.moveTo(0,0);
+//	    ctx.lineTo(500, 400);
+//	    ctx.stroke();
+//
+//        var imageObj = new Image();
+//        imageObj.onload = function() {
+//	        var pattern = ctx.createPattern(imageObj, 'repeat');
+//
+//	        ctx.rect(0, 0, canvas.width, canvas.height);
+//	        ctx.fillStyle = pattern;
+//	        ctx.fill();
+//        };
+//        imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/wood-pattern.png';
+
+	    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	    var image = new Image();
+	    image.onload = function(){
+	        ctx.drawImage(image, 0, 0 , 800, 400);
+//		    ctx.drawImage(image, 85, 45, 65, 100, 0, 0, 400, 300);
+
+		    doTheOtherStuff();
+	    };
+	    image.src = 'dino_3d.png';
+	    //image.src = 'http://makepixelart.com/peoplepods/files/images/64549.resized.png';
+
+        var butt = document.getElementsByTagName('button')[0];
+        butt.addEventListener('click', function() {
+             var container = document.getElementsByClassName('grid')[0],
+                 image = document.createElement('img');
+                 image.src = canvas.toDataURL('image/jpeg');
+                 container.appendChild(image);
+        });
+
+        function doTheOtherStuff () {
+	        var imageData = ctx.getImageData(0, 0, 800, 600);
+	        var data = imageData.data;
+	        for (var y = 0; y < canvas.height; y += 10 ) {
+		        for (var x = 0; x < canvas.width; x += 10 ) {
+			        var pixel = getCanvasPixel(x,y);
+			        pixel.map(function(val){return Math.random() * val});
+			        setDataImagePixel(x, y, data, pixel)
+		        }
+	        }
+	        ctx.putImageData(imageData, 0, 0);
+        }
+
+        function getData (ctxL, canvasL) {
+             if (!ctxL) {ctxL = ctx}
+             if (!canvasL) {canvasL = canvas}
+                 imageData = ctxL.getImageData(0, 0, canvas.width, canvas.height)
+             return imageData
+        }
+        function getCanvasPixel(x,y, ctxL, canvasL) {
+             if (!ctxL) {ctxL = ctx}
+             if (!canvasL) {canvasL = canvas}
+             var width = canvasL.width,
+                 height = canvasL.height,
+                 data = getData(ctxL, canvasL),
+                 offset = ((width * y) + x) * 4;
+             return [data[offset], data[offset + 1], data[offset + 2], data[offset + 3]]
+        }
+        function setDataImagePixel(x,y, data, pixel, canvasL) {
+             if (!canvasL) {canvasL = canvas}
+             var width = canvasL.width,
+                 height = canvasL.height,
+                 offset = ((width * y) + x) * 4;
+             pixel.forEach(function(val, i, pixel){data[offset + i] = val})
+             return data
+        }
+
+    </script>
+    <!--<script src="app.js"></script>-->
+</div>
+
+<script>
+	// var canvas = document.getElementById('canvas');
+	// var ctx = canvas.getContext('2d');
+	// var image = new Image();
+	// image.onload = function () {
+	//     // src, x, y
+	//     // ctx.drawImage(image, 0, 0);
+	//     // src, x, y, width, height
+	//      ctx.drawImage(image, 0, 0, 800, 600);
+	//     // src, srcX, srcY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight
+	//     // ctx.drawImage(image, 85, 45, 65, 100, 0, 0, 800, 600);
+
+	//     // doTheOtherStuff();
+	// }
+	// image.src = '/dino.png'
+
+	// function doTheOtherStuff () {
+	//     var imageData = getData()
+	//     var data = imageData.data
+	//     for (var y = 0; y < canvas.height; y += 10 ) {
+	//         for (var x = 0; x < canvas.width; x += 10 ) {
+	//             var pixel = getCanvasPixel(x,y)
+	//             pixel.map(function(val){return Math.random() * val})
+	//             setDataImagePixel(x, y, data, pixel)
+	//         }
+	//     }
+	//     ctx.putImageData(imageData, 0, 0);
+	// }
+	// function getData (ctxL, canvasL) {
+	//     if (!ctxL) {ctxL = ctx}
+	//     if (!canvasL) {canvasL = canvas}
+	//         imageData = ctxL.getImageData(0, 0, canvas.width, canvas.height)
+	//     return imageData
+	// }
+	// function getCanvasPixel(x,y, ctxL, canvasL) {
+	//     if (!ctxL) {ctxL = ctx}
+	//     if (!canvasL) {canvasL = canvas}
+	//     var width = canvasL.width,
+	//         height = canvasL.height,
+	//         data = getData(ctxL, canvasL),
+	//         offset = ((width * y) + x) * 4;
+	//     return [data[offset], data[offset + 1], data[offset + 2], data[offset + 3]]
+	// }
+	// function setDataImagePixel(x,y, data, pixel, canvasL) {
+	//     if (!canvasL) {canvasL = canvas}
+	//     var width = canvasL.width,
+	//         height = canvasL.height,
+	//         offset = ((width * y) + x) * 4;
+	//     pixel.forEach(function(val, i, pixel){data[offset + i] = val})
+	//     return data
+	// }
+
+	// var butt = document.getElementsByTagName('button')[0];
+	// butt.addEventListener('click', function() {
+	//     var container = document.getElementsByClassName('grid')[0],
+	//         image = document.createElement('img');
+	//         image.src = canvas.toDataURL();
+	//         container.appendChild(image)
+
+	// });
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Canvases are cool.</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="gridism.css">
+
+</head>
+<body class="wrap">
+<div class="grid">
+
+	<script src="goo.js"></script>
+    <script>
+	    window.onload = function() {
+		    var g = new Goo({
+			    container: 'container',
+			    fullscreen: true,
+			    userData: {startAngle: 0},
+			    onDraw: function(g) {
+				    var canvas = g.canvas;
+				    var ctx = g.ctx;
+
+			    },
+			    onMouseDown: function(g) {
+				    g.userData.pressed = true;
+				    g.ctx.beginPath();
+				    g.ctx.moveTo(g.mouseX, g.mouseY);
+			    },
+			    onMouseMove: function(g) {
+				    if (g.userData.pressed) {
+					    g.ctx.lineTo(g.mouseX, g.mouseY, 1, 1);
+					    g.ctx.stroke();
+				    }
+			    },
+			    onMouseUp: function(g) {
+				    g.userData.pressed = false;
+			    }
+		    });
+	    };
+    </script>
+
+</div>
+
+</body>
+</html>
