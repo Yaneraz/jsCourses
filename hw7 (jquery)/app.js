@@ -90,6 +90,26 @@ my$.fn = my$.prototype = {
         }
 
         return this;
+    },
+    delegate: function (selector, event, callback){
+        this.each(function(el){
+            el[event] = function(e){
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+
+                if (selector.charAt(0) === '#' && target.id === selector.substr(1)){
+                    callback.call(target, e);
+                }
+                if (selector.charAt(0) === '.' && target.className === selector.substr(1)){
+                    callback.call(target, e);
+                }
+                if (target.tagName.toLowerCase() === selector){
+                    callback.call(target, e);
+                }
+            };
+        });
+
+        return this;
     }
 };
 my$.fn.init.prototype = my$.fn;
@@ -126,7 +146,9 @@ test("my$, target .red and style change", function() {
 
 //Добавить delegate метод к вашему wrapped set'у из задания https://gist.github.com/dmitryt/7590375
 
-// TODO: add delegate method after TableTraverse will be completed
+my$('div').delegate('.red', 'onclick', function(e){
+    console.log(this)
+});
 
 //Бонусные очки: добавить возможность, передавать второй /третий аргумент как время, чтобы стили применились через какое-то время
 
