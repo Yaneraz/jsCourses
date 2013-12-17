@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="../vendor/qunit-1.12.0.css" />
+	<style type="text/css">
+		#tbl {
+			margin: 20px 0;
+		}
+		td {
+			height: 40px;
+			width: 120px;
+		}
+		table {
+
+		}
+		table,
+		td {
+			border: 2px solid #000;
+		}
+		.active,
+		tr.active td {
+			border:2px solid #00c92c;
+		}
+	</style>
+</head>
+<body>
+
+<div id="tbl"></div>
+
+<!-- test area -->
+<div id="qunit"></div>
+<!-- / test area -->
+
+<script src="../vendor/assert.js"></script>
+<script src="../vendor/qunit-1.12.0.js"></script>
+<script src="delegate.js"></script>
+<script src="tableTraverser.js"></script>
+
+</body>
+</html>
