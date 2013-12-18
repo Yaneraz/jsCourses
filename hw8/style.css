@@ -1,0 +1,117 @@
+/* Styles go here */
+* {
+  box-sizing: border-box;
+}
+
+hr {
+  margin: 20px auto 20px;  
+}
+/* animation stuff  */
+.tab-body:target {
+  min-height: 220px;
+}
+
+.tab-body {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: min-height 0.2s ease-in;  
+	-moz-transition:    min-height 0.2s ease-in;
+	-ms-transition:     min-height 0.2s ease-in; 
+	-o-transition:      min-height 0.2s ease-in;  
+	transition:         min-height 0.2s ease-in;
+}
+/* bells & whistles for input */
+.tab {
+  margin-top: 5px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+  margin-bottom: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  border-color: #ddd;
+  
+}
+
+.tab-body {
+ border-top-color: #ddd; 
+ border-top: 1px solid #ddd;
+}
+
+.tab-head {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  
+}
+.tab-head a {
+  display: inline-block;
+  padding: 20px;
+  text-decoration: none;
+  color: #333;
+  width: 100%;
+}
+
+/* slider stuff */
+input[type=range] {
+    position: relative;
+    -webkit-appearance: none;
+    background-color: silver;
+    width: 200px;
+    height:20px;
+}
+input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none;
+    background-color: #666;
+    -webkit-transition:  background-color 0.8s ease-in;  
+  	-moz-transition:     background-color 0.8s ease-in;
+  	-ms-transition:      background-color 0.8s ease-in; 
+  	-o-transition:       background-color 0.8s ease-in;  
+  	transition:          background-color 0.8s ease-in;
+    opacity: 0.5;
+    width: 10px;
+    height: 26px;
+}
+
+input[type="range"]:active:after {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  background-color: rgba(129,129,129,0.3);
+}
+input[type="range"]:active::-webkit-slider-thumb {
+    background-color: red;
+    z-index: 1;
+    position: relative;
+}
+/* chameleon */
+a.chameleon {
+  display: inline-block;
+  padding: 40px;
+  background-color: rgb(0, 255, 71);
+  -webkit-transition:  background-color 0.5s ease-in;  
+	-moz-transition:     background-color 0.5s ease-in;
+	-ms-transition:      background-color 0.5s ease-in; 
+	-o-transition:       background-color 0.5s ease-in;  
+	transition:          background-color 0.5s ease-in;
+}
+
+.chameleon:hover {
+  background-color: rgb(115, 134, 120);
+}
+.chameleon:active {
+  background-color: rgb(160, 255, 186);
+}
+
