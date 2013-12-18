@@ -1,5 +1,3 @@
-'use strict';
-
 //Напишите конструктор my$, который принимает аргументом DOM селектор.
 //
 //    Реализуйте методы width, height которые соответсвенно изменяют ширишу и высоту всех селекторов,
@@ -19,6 +17,8 @@
 //огранничиться 5 параметрами, так как их слишком много ). Сделать возможным, чтобы эти методы были
 //chainable. Добавить возможность, передавать второй /третий аргумент как время, чтобы стили
 //применились через какое-то время.
+
+'use strict';
 
 function my$(selector){
     return new my$.fn.init(selector);
@@ -118,18 +118,28 @@ function applyStyles(el, prop, val){
     el.style[prop] = val;
 }
 
-var $div = my$('div')
-//console.log( $div ) //показать все div на странице.
+var $div = my$('div');
+var $red = my$('.red');
 
-var $red = my$('.red')
-//console.log( $red ) //показать все DOM элементы с классом .red, которые присутсвуют на странице
-
-$red.width('100').height(120); //изменяет текущую высоту до 100px всех DOM элементов с классом .red
+$red.width('100').height(120);
 
 my$('span').css('color', '#000').css({
     'font-size':'12px',
     'height': '30px'
 });
+
+my$('div').delegate('.red', 'onclick', function(e){
+    console.log(this)
+});
+
+my$('span').css({
+    'font-size':'10px',
+    'height': '20px',
+    'border-color':'red'
+}, 1500);
+
+//console.log( $div ) //показать все div на странице.
+//console.log( $red ) //показать все DOM элементы с классом .red, которые присутсвуют на странице
 
 test("my$, target .red and style change", function() {
     var div = document.getElementsByClassName('red'),
@@ -143,20 +153,6 @@ test("my$, target .red and style change", function() {
     equal(span[0].style.fontSize, '12px', 'font-size was set to 12px');
     equal(span[0].style.height, '30px', 'height was set to 30px');
 });
-
-//Добавить delegate метод к вашему wrapped set'у из задания https://gist.github.com/dmitryt/7590375
-
-my$('div').delegate('.red', 'onclick', function(e){
-    console.log(this)
-});
-
-//Бонусные очки: добавить возможность, передавать второй /третий аргумент как время, чтобы стили применились через какое-то время
-
-my$('span').css({
-    'font-size':'10px',
-    'height': '20px',
-    'border-color':'red'
-}, 1500);
 
 test("my$ style change after delay", function() {
     stop(); // Pause the test
