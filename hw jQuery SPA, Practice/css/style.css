@@ -50,3 +50,8 @@ body > header a:last-child:after {
 #list {
 	overflow: hidden;
 }
+
+.field {
+	margin-bottom: 12px;
+}
+	.field .button { margin-right: 9px;}

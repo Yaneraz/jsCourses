@@ -1,0 +1,9 @@
+<ul class="small-block-grid-3">
+	{{ . }}
+	<li>
+		<div class="person {{ user.gender }}">
+			<a class="{{  }}" href="#user-{{ id }}"><i>{{ user.name.title }}</i> {{ user.name.last }}, {{ user.name.first }}</a>
+		</div>
+	</li>
+	{{/. }}
+</ul>
