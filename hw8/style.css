@@ -3,6 +3,13 @@
 	padding: 0;
 }
 
+body.no-select {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 body {
 	font-size: 14px;
 	padding: 20px;

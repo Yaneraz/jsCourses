@@ -3,10 +3,10 @@ $(function () {
         headClass: '.tab__head', // same as default
         bodyClass: '.tab__body' // same as default
     });
-    $('.chameleon').chameleon();
     $('.drag__item').draggable({
-        containerClass: '.drag'
+        containerClass: '.drag123'
     });
+    $('.chameleon').chameleon();
 });
 
 $.fn.accordion = function (options) {
@@ -50,36 +50,67 @@ $.fn.accordion = function (options) {
 // TODO: make better capture and restrict by containment field
 $.fn.draggable = function (options) {
     var settings = $.extend({
-            containerClass: '.drag'
+            //containerClass: '.drag'
         }, options);
 
     this.each(function () {
         var el = $(this),
             isDragging = false,
             container = settings.containerClass ? $(this).parents(settings.containerClass) : null,
-            baseTop = settings.containerClass ? $(settings.containerClass).offset().top : $(this).offset().top,
-            baseLeft = settings.containerClass ? $(settings.containerClass).offset().left : $(this).offset().left;
+            containerMax = {};
+
+        if (container.length){
+                containerMax = {
+                top: container.offset().top,
+                left: container.offset().left,
+                right: container.offset().left + container.width() - el.width(),
+                bottom: container.offset().top + container.height() - el.height()
+            }
+        }
 
         el.on({
             mousedown: function (e) {
                 isDragging = true;
+                $(document.body).addClass('no-select');
             }
         });
 
         $('body').on({
-            mousemove: function(e){
-                if (isDragging) {
-                    var top = e.pageY - baseTop,
-                        left = e.pageX - baseLeft;
-
-                    el.css({
-                        top: top,
-                        left: left
-                    });
-                }
-            },
             mouseup: function (e) {
                 isDragging = false;
+                $(document.body).removeClass('no-select');
+            },
+            mousemove: function (e) {
+                if (isDragging) {
+                    var top = parseInt(e.pageY, 10),
+                        left = parseInt(e.pageX, 10);
+
+                    if (container.length) {
+                        // top side calculation
+                        if (top > containerMax.top && top < containerMax.bottom) {
+                            el.offset({top: top});
+                        } else if (top > containerMax.bottom) {
+                            el.offset({top: containerMax.bottom});
+                        } else if (top < containerMax.top) {
+                            el.offset({top: containerMax.top + 1});
+                        }
+
+                        // left side calculation
+                        if (left > containerMax.left && left < containerMax.right) {
+                            el.offset({left: left});
+                        } else if (left > containerMax.right) {
+                            el.offset({left: containerMax.right});
+                        } else if (left < containerMax.left) {
+                            el.offset({left: containerMax.left + 1});
+                        }
+                    } else {
+                        el.offset({
+                            top: top,
+                            left: left
+                        });
+                    }
+
+                }
             }
         });
     });
