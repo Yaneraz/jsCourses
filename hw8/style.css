@@ -49,3 +49,9 @@ body {
 		width: 60px;
 		background: #cccccc;
 	}
+
+.chameleon {
+	padding: 10px 15px;
+	background: rgb(50, 159, 50);
+	border-radius: 6px;
+}

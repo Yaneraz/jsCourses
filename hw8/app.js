@@ -4,7 +4,7 @@ $(function () {
         bodyClass: '.tab__body' // same as default
     });
     $('.drag__item').draggable({
-        containerClass: '.drag123'
+        containerClass: '.drag'
     });
     $('.chameleon').chameleon();
 });
@@ -47,7 +47,6 @@ $.fn.accordion = function (options) {
     return this;
 };
 
-// TODO: make better capture and restrict by containment field
 $.fn.draggable = function (options) {
     var settings = $.extend({
             //containerClass: '.drag'
@@ -75,7 +74,7 @@ $.fn.draggable = function (options) {
             }
         });
 
-        $('body').on({
+        $(document.body).on({
             mouseup: function (e) {
                 isDragging = false;
                 $(document.body).removeClass('no-select');
@@ -120,31 +119,40 @@ $.fn.draggable = function (options) {
 
 $.fn.chameleon = function (options) {
     var settings = $.extend({
-            speed: 500
+            speed: 300
         }, options),
-        onClick = function (e) {
-            e.preventDefault();
-            var $this = $(this);
-            $this.stop().animate({
-                backgroundColor: settings.activeColor
-            }, settings.speed);
-        },
-        onHover = function () {
-            var $this = $(this);
-            $this.stop().animate({
-                backgroundColor: settings.hoverColor
-            }, settings.speed);
-        },
-        onLeave = function () {
-            var $this = $(this);
-            $this.stop().animate({
-                backgroundColor: settings.defaultColor
-            }, settings.speed);
-        };
-    return this.each(function () {
-        var $this = $(this);
-        $this.on('click', onClick);
-        $this.on('mouseenter', onHover);
-        $this.on('mouseleave', onLeave);
+        baseBg = $(this).css('background-color'),
+        shadeColor = function(color, percent) {
+
+            // validate hex string
+            color = String(color).replace(/[^0-9a-f]/gi, '');
+            if (color.length < 6) {
+                color = color[0]+color[0]+color[1]+color[1]+color[2]+color[2];
+            }
+            percent = percent || 0;
+
+            // convert to decimal and change luminosity
+            var rgb = "#", c, i;
+            for (i = 0; i < 3; i++) {
+                c = parseInt(color.substr(i*2,2), 16);
+                c = Math.round(Math.min(Math.max(0, c + (c * percent)), 255)).toString(16);
+                rgb += ("00"+c).substr(c.length);
+            }
+
+            return rgb;
+    };
+
+    this.each(function(){
+        $(this).on({
+            mouseenter: function() {
+                 $(this).css('background-color', shadeColor(baseBg, 0));
+            },
+            mousedown: function() {
+                $(this).css('background-color', shadeColor(baseBg, -0.1));
+            },
+            'mouseleave mouseup': function() {
+                $(this).css('background-color', baseBg);
+            }
+        });
     });
 };
