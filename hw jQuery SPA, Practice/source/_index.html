@@ -36,11 +36,23 @@
 	</section>
 </nav>
 
-
+<!--
 <div id="login">
+	<div class="row">
+		<div class="column small-offset-1 small-10 large-offset-2 large-8">
+			<h1>Login</h1>
 
+			<form method="post" action="http://localhost:8888/login" class="small-8">
+				<input class="error" name="login" type="text" placeholder="enter your login">
+				<small class="error">Something went wrong!</small>
+				<input name="password" type="password" placeholder="enter your password">
+				<input type="submit" value="Log me in" class="button">
+				<a href="/signup" class="button secondary">Sign me up</a>
+			</form>
+		</div>
+	</div>
 </div>
-
+-->
 
 <!--
 <hr>
@@ -65,7 +77,23 @@
 
 -->
 <div id="list">
-	<img class="loader" src="css/ajax-loader.gif" alt="" />
+	<ul class="small-block-grid-3">
+		<li>
+			<div class="person male">
+				<a class='url n' href="#show-full"><i>Mr.</i> Know-it-all, I</a>
+			</div>
+		</li>
+		<li>
+			<div class="person female">
+				<a class='url n' href="#show-full"><i>Mrs.</i> Did-it, Been-there</a>
+			</div>
+		</li>
+		<li>
+			<div class="person male">
+				<a class='url n' href="#show-full"><i>Mr.</i> Real Fun.</a>
+			</div>
+		</li>
+	</ul>
 </div>
 
 <!--
@@ -97,8 +125,7 @@
 })</script><![endif]-->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="js/markup.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../vendor/jquery-1.10.2.min.js"><\/script>')</script>
 <script src="js/app.js"></script>
 
 </body>
