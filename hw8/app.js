@@ -68,14 +68,14 @@ $.fn.draggable = function (options) {
         }
 
         el.on({
-            mousedown: function (e) {
+            mousedown: function () {
                 isDragging = true;
                 $(document.body).addClass('no-select');
             }
         });
 
         $(document.body).on({
-            mouseup: function (e) {
+            mouseup: function () {
                 isDragging = false;
                 $(document.body).removeClass('no-select');
             },
